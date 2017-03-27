@@ -18,6 +18,9 @@ class Home extends React.Component {
         <GifList
           gifs={ this.props.gifs }
           onGifSelect={ selectedGif => this.props.openModal({selectedGif}) }
+          onFavoriteSelect={ selectedGif => this.props.favoriteGif({selectedGif})}
+          onFavoriteDeselect={ selectedGif => this.props.unFavoriteGif({selectedGif})}
+          isAuthenticated={this.props.authenticated}
         />
         <GifModal
           modalIsOpen={ this.props.modalIsOpen }
@@ -31,6 +34,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    authenticated: state.auth.authenticated,
     gifs: state.gifs.data,
     modalIsOpen: state.modal.modalIsOpen,
     selectedGif: state.modal.selectedGif
